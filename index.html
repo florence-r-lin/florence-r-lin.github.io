@@ -56,6 +56,25 @@
 		.track{display:flex;gap:16px;padding:6px 6px 6px 0}
 		.slide{flex:0 0 30%;aspect-ratio:1/1;height:auto;border-radius:8px;overflow:hidden;scroll-snap-align:start;background:#eee}
 		.slide img{width:100%;height:100%;object-fit:cover;display:block}
+		.slide{position:relative;}
+		.slide-inner{position:relative;width:100%;height:100%;}
+		.slide-inner img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .25s ease;}
+		.slide-overlay{
+			position:absolute;inset:0;
+			background:rgba(0,0,0,0);
+			display:flex;align-items:center;justify-content:center;
+			transition:background .25s ease;
+			padding:12px;box-sizing:border-box;
+		}
+		.slide-overlay span{
+			color:#fff;font-size:13px;font-weight:400;
+			text-align:center;opacity:0;
+			transition:opacity .2s ease;
+			letter-spacing:.01em;line-height:1.4;
+		}
+		.slide-inner:has(.slide-overlay):hover img{filter:brightness(.55);}
+		.slide-inner:hover .slide-overlay{background:rgba(0,0,0,.35);}
+		.slide-inner:hover .slide-overlay span{opacity:1;}
 
 		/* Arrows */
 		.arrow{position:absolute;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--accent);font-size:22px;cursor:pointer;padding:6px 8px;opacity:.9}
@@ -86,14 +105,15 @@
 	<header class="nav-wrap">
 		<nav>
 			<div class="nav-left">
-				<a class="nav-link" href="#projects" data-route>Projects</a>
-				<a class="nav-link" href="#gallery" data-route>My Gallery</a>
+				<a class="nav-link" href="#gallery" data-route>Gallery</a>
+				<!-- <a class="nav-link" href="#projects" data-route>Work</a> -->
 			</div>
 			<div class="nav-center">
 				<a class="brand" href="#home" data-route>Florence Rui Lin</a>
 			</div>
 			<div class="nav-right">
 				<a class="nav-link" href="https://www.linkedin.com/in/florence-rui-lin/" target="_blank" rel="noopener">Contact</a>
+				<a class="nav-link" href="https://drive.google.com/file/d/1qSdltMGtMQyC6u4pPCHV_xHKhbvc-gmc/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
 			</div>
 		</nav>
 		<hr class="sep" />
@@ -108,124 +128,123 @@
 		</div>
 	</section>
 
-	<section id="projects" class="view">
+	<!-- <section id="projects" class="view">
 		<div class="page-container">
 			<div class="projects-inner">
-				<!-- empty for now -->
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<section id="gallery" class="view">
 		<div class="page-container">
 			<div class="gallery-inner">
 
 				<div class="gallery-section">
-					<div class="carousel" data-carousel>
-						<button class="arrow left" data-prev aria-label="Previous">‹</button>
-						<div class="viewport" tabindex="0">
-							<div class="track">
-								<div class="slide"><img src="pics/loc/6FDED467-B643-45B8-BA8C-DC20E5B83819.JPG" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN1936.JPG" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN1987.jpg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN2065_Original.jpg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN2406.jpg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN2435.JPG" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN2453.jpg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN2457.JPG" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/DSCN2471.JPG" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_0300.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_0879.jpg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_0953.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_1078.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_1989.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_2642.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_2982.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_5646.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_6829.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_7074.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_7361.jpeg" alt="loc"></div>
-								<div class="slide"><img src="pics/loc/IMG_9437.jpeg" alt="loc"></div>
-							</div>
-						</div>
-						<button class="arrow right" data-next aria-label="Next">›</button>
+				<div class="carousel" data-carousel>
+					<button class="arrow left" data-prev aria-label="Previous">‹</button>
+					<div class="viewport" tabindex="0">
+					<div class="track">
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/6FDED467-B643-45B8-BA8C-DC20E5B83819.JPG" alt="loc"><div class="slide-overlay"><span>big sur, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN1936.JPG" alt="loc"><div class="slide-overlay"><span>venice, italy</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN1987.jpg" alt="loc"><div class="slide-overlay"><span>florence, italy</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN2065_Original.jpg" alt="loc"><div class="slide-overlay"><span>macau</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN2406.jpg" alt="loc"><div class="slide-overlay"><span>mt. tamalpais, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN2435.JPG" alt="loc"><div class="slide-overlay"><span>coogee beach, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN2453.jpg" alt="loc"><div class="slide-overlay"><span>bald hill lookout, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN2457.JPG" alt="loc"><div class="slide-overlay"><span>blue mountains, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/DSCN2471.JPG" alt="loc"><div class="slide-overlay"><span>shoal bay, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_0300.jpeg" alt="loc"><div class="slide-overlay"><span>san francisco, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_0879.jpg" alt="loc"><div class="slide-overlay"><span>coogee beach, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_0953.jpeg" alt="loc"><div class="slide-overlay"><span>bald hill lookout, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_1078.jpeg" alt="loc"><div class="slide-overlay"><span>wentworth falls, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_1989.jpeg" alt="loc"><div class="slide-overlay"><span>point lobos, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_2642.jpeg" alt="loc"><div class="slide-overlay"><span>copenhagen, den</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_2982.jpeg" alt="loc"><div class="slide-overlay"><span>los angeles, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_5646.jpeg" alt="loc"><div class="slide-overlay"><span>san diego, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_6829.jpeg" alt="loc"><div class="slide-overlay"><span>dana point, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_7074.jpeg" alt="loc"><div class="slide-overlay"><span>little island, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_7361.jpeg" alt="loc"><div class="slide-overlay"><span>santa barbara, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/loc/IMG_9437.jpeg" alt="loc"><div class="slide-overlay"><span>rome, italy</span></div></div></div>
 					</div>
-					<div class="section-title">travels</div>
+					</div>
+					<button class="arrow right" data-next aria-label="Next">›</button>
+				</div>
+				<div class="section-title">travels</div>
 				</div>
 
 				<div class="gallery-section">
-					<div class="carousel" data-carousel>
-						<button class="arrow left" data-prev aria-label="Previous">‹</button>
-						<div class="viewport" tabindex="0">
-							<div class="track">
-								<div class="slide"><img src="pics/people/064CD926-75D3-4F72-BEA0-26EC9A385B95.jpg" alt="people"></div>
-								<div class="slide"><img src="pics/people/DSCN1896.jpg" alt="people"></div>
-								<div class="slide"><img src="pics/people/DSCN2593.jpg" alt="people"></div>
-								<div class="slide"><img src="pics/people/DSCN2769.JPG" alt="people"></div>
-								<div class="slide"><img src="pics/people/DSCN2772.JPG" alt="people"></div>
-								<div class="slide"><img src="pics/people/DSCN2793.jpg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_1447.JPG" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_1476.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_3128.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_3948.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_3985.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_5068.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_5825 2.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_8241.jpeg" alt="people"></div>
-								<div class="slide"><img src="pics/people/IMG_9030.jpeg" alt="people"></div>
-							</div>
-						</div>
-						<button class="arrow right" data-next aria-label="Next">›</button>
+				<div class="carousel" data-carousel>
+					<button class="arrow left" data-prev aria-label="Previous">‹</button>
+					<div class="viewport" tabindex="0">
+					<div class="track">
+						<div class="slide"><div class="slide-inner"><img src="pics/people/064CD926-75D3-4F72-BEA0-26EC9A385B95.jpg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/DSCN1896.jpg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/DSCN2593.jpg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/DSCN2769.JPG" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/DSCN2772.JPG" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/DSCN2793.jpg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_1447.JPG" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_1476.jpeg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3128.jpeg" alt="people">/div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3948.jpeg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3985.jpeg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_5068.jpeg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_5825 2.jpeg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_8241.jpeg" alt="people"></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_9030.jpeg" alt="people"></div></div>
 					</div>
-					<div class="section-title">friends</div>
+					</div>
+					<button class="arrow right" data-next aria-label="Next">›</button>
+				</div>
+				<div class="section-title">friends</div>
 				</div>
 
 				<div class="gallery-section">
-					<div class="carousel" data-carousel>
-						<button class="arrow left" data-prev aria-label="Previous">‹</button>
-						<div class="viewport" tabindex="0">
-							<div class="track">
-								<div class="slide"><img src="pics/food/0B3E728E-ECC0-489C-942D-177D598A8EB0.JPG" alt="food"></div>
-								<div class="slide"><img src="pics/food/DSCN2170_Original.jpg" alt="food"></div>
-								<div class="slide"><img src="pics/food/DSCN2377.jpg" alt="food"></div>
-								<div class="slide"><img src="pics/food/DSCN2551.JPG" alt="food"></div>
-								<div class="slide"><img src="pics/food/DSCN2624.JPG" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_0918.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_2075.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_2805.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_2842.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_2887.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3051.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3343.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3500.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3676.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3701.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3836.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_3856.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_4509.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_5474.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_6062 2.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_6206.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_6233.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_6562.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_6605.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_7335 2.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_7522.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_7767.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8065 2.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8162.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8671.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8694.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8719.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8767.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_8786.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_9559.jpeg" alt="food"></div>
-								<div class="slide"><img src="pics/food/IMG_9774.jpeg" alt="food"></div>
-							</div>
-						</div>
-						<button class="arrow right" data-next aria-label="Next">›</button>
+				<div class="carousel" data-carousel>
+					<button class="arrow left" data-prev aria-label="Previous">‹</button>
+					<div class="viewport" tabindex="0">
+					<div class="track">
+						<div class="slide"><div class="slide-inner"><img src="pics/food/0B3E728E-ECC0-489C-942D-177D598A8EB0.JPG" alt="food"><div class="slide-overlay"><span>626 icecream, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/DSCN2170_Original.jpg" alt="food"><div class="slide-overlay"><span>ladies street sik faan co, hk</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/DSCN2377.jpg" alt="food"><div class="slide-overlay"><span>banh mi co ut, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/DSCN2551.JPG" alt="food"><div class="slide-overlay"><span>hart bakery, den</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/DSCN2624.JPG" alt="food"><div class="slide-overlay"><span>satoria panatieri, esp</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_0918.jpeg" alt="food"><div class="slide-overlay"><span>envoy cafe, aus</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_2075.jpeg" alt="food"><div class="slide-overlay"><span>yala coffee, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_2805.jpeg" alt="food"><div class="slide-overlay"><span>terrassa martinez, esp</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_2842.jpeg" alt="food"><div class="slide-overlay"><span>jon cake, esp</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_2887.jpeg" alt="food"><div class="slide-overlay"><span>sagrada tapas, esp</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3051.jpeg" alt="food"><div class="slide-overlay"><span>matcha, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3343.jpeg" alt="food"><div class="slide-overlay"><span>old brea chop house, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3500.jpeg" alt="food"><div class="slide-overlay"><span>hanbat shul lung tang, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3676.jpeg" alt="food"><div class="slide-overlay"><span>matcha</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3701.jpeg" alt="food"><div class="slide-overlay"><span>mountain house, ca/span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3836.jpeg" alt="food"><div class="slide-overlay"><span>saero, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3856.jpeg" alt="food"><div class="slide-overlay"><span>heytea, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_4509.jpeg" alt="food"><div class="slide-overlay"><span>sky boss, hk</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_5474.jpeg" alt="food"><div class="slide-overlay"><span>rok, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_6062 2.jpeg" alt="food"><div class="slide-overlay"><span>matcha</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_6206.jpeg" alt="food"><div class="slide-overlay"><span>lala bakeshop, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_6233.jpeg" alt="food"><div class="slide-overlay"><span>apollo bagels, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_6562.jpeg" alt="food"><div class="slide-overlay"><span>aji kiji, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_6605.jpeg" alt="food"><div class="slide-overlay"><span>truly pizza, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_7335 2.jpeg" alt="food"><div class="slide-overlay"><span>kin bakeshop, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_7522.jpeg" alt="food"><div class="slide-overlay"><span>archives of us, ca</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_7767.jpeg" alt="food"><div class="slide-overlay"><span>bread</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8065 2.jpeg" alt="food"><div class="slide-overlay"><span>unitora toyosu, jp</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8162.jpeg" alt="food"><div class="slide-overlay"><span>matcha</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8671.jpeg" alt="food"><div class="slide-overlay"><span>osteria al squero, ita</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8694.jpeg" alt="food"><div class="slide-overlay"><span>okdongsik, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8719.jpeg" alt="food"><div class="slide-overlay"><span>okdongsik, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8767.jpeg" alt="food"><div class="slide-overlay"><span>ari ari, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_8786.jpeg" alt="food"><div class="slide-overlay"><span>uluh, ny</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_9559.jpeg" alt="food"><div class="slide-overlay"><span>ristoriante la nuova pizzetta, ita</span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_9774.jpeg" alt="food"><div class="slide-overlay"><span>misoolkwan, ca</span></div></div></div>
 					</div>
-					<div class="section-title">eats</div>
+					</div>
+					<button class="arrow right" data-next aria-label="Next">›</button>
+				</div>
+				<div class="section-title">eats</div>
 				</div>
 
 			</div>
