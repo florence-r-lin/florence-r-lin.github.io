@@ -11,6 +11,7 @@
 			--bg:#ffffff;
 			--text:#111827;
 			--muted:#6b7280;
+			--border:#eef0f6;
 		}
 		html,body{height:100%;}
 		body{
@@ -21,31 +22,144 @@
 			-webkit-font-smoothing:antialiased;
 			-moz-osx-font-smoothing:grayscale;
 			line-height:1.45;
-			-webkit-tap-highlight-color: transparent;
+			-webkit-tap-highlight-color:transparent;
 		}
-		/* Nav */
+
+		/* Nav — desktop */
 		.nav-wrap{max-width:1100px;margin:28px auto 12px;padding:0 24px;}
 		nav{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;}
 		.nav-left,.nav-right{display:flex;gap:20px;align-items:center}
 		.nav-center{position:absolute;left:50%;transform:translateX(-50%);}
 		.brand{font-family:'DM Sans',sans-serif;font-size:18px;color:var(--muted);font-weight:700;text-decoration:none;cursor:pointer}
-        .brand:hover{color:var(--accent)}
+		.brand:hover{color:var(--accent)}
 		a.nav-link{color:var(--muted);text-decoration:none;font-weight:300}
 		a.nav-link:hover{color:var(--accent)}
-		hr.sep{border:none;border-top:1px solid #eef0f6;margin-top:18px}
+		hr.sep{border:none;border-top:1px solid var(--border);margin-top:18px}
+
+		/* Hamburger nav */
+		.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--muted);}
+		.hamburger:hover{color:var(--accent)}
+		.hamburger svg{display:block;}
+		.mobile-menu{
+			display:none;
+			flex-direction:column;
+			gap:0;
+			border-top:1px solid var(--border);
+			padding:8px 0 4px;
+		}
+		.mobile-menu.open{display:flex;}
+		.mobile-menu a{
+			color:var(--muted);
+			text-decoration:none;
+			font-weight:300;
+			font-size:15px;
+			padding:11px 0;
+			border-bottom:1px solid var(--border);
+		}
+		.mobile-menu a:last-child{border-bottom:none;}
+		.mobile-menu a:hover{color:var(--accent);}
 
 		/* Views */
 		.view{display:none;}
 		.view.active{display:block;}
-
-		/* Each view has its own container */
 		.page-container{max-width:1100px;margin:0 auto;padding:0 24px 80px;}
 
-		/* Home */
-		.home-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 0;}
-		.home-inner h1{font-family:'DM Sans',serif;font-size:44px;margin:8px 0;color:var(--text)}
-		.home-inner p.subtitle{max-width:760px;color:var(--muted);font-size:18px;margin:12px 0 20px}
-		.portrait{width:220px;height:220px;border-radius:12px;object-fit:cover;background:#f3f2fa}
+		/* Home — side by side */
+		.home-inner{
+			display:flex;
+			flex-direction:row;
+			align-items:flex-start;
+			gap:40px;
+			padding:52px 0;
+		}
+		.home-text{
+            color:var(--muted);
+			display:flex;
+			flex-direction:column;
+			justify-content:center;
+			padding-top:8px;
+		}
+		.home-text p.subtitle{
+			color:var(--muted);
+			font-size:17px;
+			margin:0;
+			line-height:1.7;
+			font-weight:300;
+		}
+		.portrait{width:350px;height:350px;border-radius:12px;object-fit:cover;background:#f3f2fa;flex-shrink:0;}
+
+		/* Work — Option C: Tabs */
+		.work-inner{padding-top:40px;}
+
+		.tabs{
+			display:flex;
+			gap:0;
+			border-bottom:1px solid var(--border);
+			margin-bottom:0;
+		}
+		.tab-btn{
+			font-family:'DM Sans',sans-serif;
+			font-size:13px;
+			font-weight:300;
+			color:var(--muted);
+			background:none;
+			border:none;
+			border-bottom:2px solid transparent;
+			padding:10px 20px 11px;
+			margin-bottom:-1px;
+			cursor:pointer;
+			letter-spacing:.01em;
+			transition:color .15s, border-color .15s;
+		}
+		.tab-btn:hover{color:var(--text);}
+		.tab-btn.active{
+			color:var(--text);
+			border-bottom-color:var(--text);
+			font-weight:400;
+		}
+
+		.tab-panel{display:none;padding-top:0;}
+		.tab-panel.active{display:block;}
+
+		.proj-item{
+			padding:20px 0;
+			border-bottom:1px solid var(--border);
+		}
+		.proj-item:last-child{border-bottom:none;}
+
+		.proj-tag{
+			font-size:11px;
+			color:var(--muted);
+			font-weight:300;
+			margin-bottom:5px;
+			letter-spacing:.01em;
+		}
+		.proj-title{
+			font-size:14px;
+			font-weight:700;
+			color:var(--text);
+			margin-bottom:6px;
+			line-height:1.35;
+		}
+		.proj-desc{
+			font-size:13px;
+			color:var(--muted);
+			line-height:1.6;
+			font-weight:300;
+			margin-bottom:10px;
+			max-width:720px;
+		}
+		.proj-links{display:flex;gap:8px;flex-wrap:wrap;}
+		.proj-link{
+			font-size:11px;
+			color:var(--muted);
+			border:1px solid var(--border);
+			border-radius:20px;
+			padding:3px 11px;
+			text-decoration:none;
+			transition:color .15s,border-color .15s;
+		}
+		.proj-link:hover{color:var(--accent);border-color:var(--accent);}
 
 		/* Gallery */
 		.gallery-inner{padding-top:24px;}
@@ -75,29 +189,31 @@
 		.slide-inner:has(.slide-overlay):hover img{filter:brightness(.55);}
 		.slide-inner:hover .slide-overlay{background:rgba(0,0,0,.35);}
 		.slide-inner:hover .slide-overlay span{opacity:1;}
-
-		/* Arrows */
 		.arrow{position:absolute;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--accent);font-size:22px;cursor:pointer;padding:6px 8px;opacity:.9}
 		.arrow.left{left:4px}
 		.arrow.right{right:4px}
 		.arrow:focus{outline:2px solid rgba(123,111,190,.15);border-radius:6px}
 
-		/* Projects */
-		.projects-inner{padding-top:36px;min-height:240px;}
-
 		@media(max-width:900px){
 			.nav-wrap{margin:18px auto}
-			.home-inner h1{font-size:34px}
 			.slide{flex:0 0 45%;aspect-ratio:1/1;height:auto}
-			.portrait{width:300px;height:300px}
+			.home-inner{gap:28px;padding:36px 0;}
+			.portrait{width:160px;height:160px;}
 		}
-		@media(max-width:520px){
-			.nav-left,.nav-right{gap:12px}
-			.nav-center{position:static;transform:none;order:0;margin:auto}
-			nav{flex-wrap:wrap}
+		@media(max-width:600px){
+			/* Hide desktop nav links, show hamburger */
+			.nav-left,.nav-right{display:none;}
+			.nav-center{position:static;transform:none;}
+			nav{justify-content:space-between;align-items:center;}
+			.hamburger{display:block;}
+
+			/* Home stacks on mobile */
+			.home-inner{flex-direction:column;align-items:flex-start;gap:20px;padding:28px 0;}
+			.portrait{width:120px;height:120px;}
+			.home-text p.subtitle{font-size:15px;}
+
 			.slide{flex:0 0 70%;aspect-ratio:1/1;height:auto}
-			.home-inner{padding:28px 12px}
-			.home-inner h1{font-size:28px}
+			.tab-btn{padding:10px 14px 11px;font-size:12px;}
 		}
 	</style>
 </head>
@@ -106,7 +222,7 @@
 		<nav>
 			<div class="nav-left">
 				<a class="nav-link" href="#gallery" data-route>Gallery</a>
-				<!-- <a class="nav-link" href="#projects" data-route>Work</a> -->
+				<a class="nav-link" href="#work" data-route>Work</a>
 			</div>
 			<div class="nav-center">
 				<a class="brand" href="#home" data-route>Florence Rui Lin</a>
@@ -115,25 +231,135 @@
 				<a class="nav-link" href="https://www.linkedin.com/in/florence-rui-lin/" target="_blank" rel="noopener">Contact</a>
 				<a class="nav-link" href="https://drive.google.com/file/d/1qSdltMGtMQyC6u4pPCHV_xHKhbvc-gmc/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
 			</div>
+			<button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+				<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+					<line x1="3" y1="6" x2="19" y2="6"/>
+					<line x1="3" y1="11" x2="19" y2="11"/>
+					<line x1="3" y1="16" x2="19" y2="16"/>
+				</svg>
+			</button>
 		</nav>
+		<div class="mobile-menu" id="mobile-menu">
+			<a href="#gallery" data-route data-mobile>Gallery</a>
+			<a href="#work" data-route data-mobile>Work</a>
+			<a href="https://www.linkedin.com/in/florence-rui-lin/" target="_blank" rel="noopener">Contact</a>
+			<a href="https://drive.google.com/file/d/1qSdltMGtMQyC6u4pPCHV_xHKhbvc-gmc/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+		</div>
 		<hr class="sep" />
 	</header>
 
 	<section id="home" class="view active">
 		<div class="page-container">
 			<div class="home-inner">
-                <img class="portrait" src="pics/IMG_1434.jpg" alt="Florence">
-				<p class="subtitle"><br>Hi! I'm Florence :)<br>I'm currently a third year studying <br> Computer Science at Harvey Mudd College 👩🏻‍💻 <br> and Linguistics at Pomona College ✍🏻</p>
+				<img class="portrait" src="pics/IMG_1434.jpg" alt="Florence">
+				<div class="home-text">
+					<p class="subtitle">Hi! I'm Florence :)<br><br> 
+                        What I'm up to:
+                        <ul style="list-style-type:circle">
+                            <li>Building as a SWE Intern at JPMorganChase 👩🏻‍💻</li>
+                            <li>Trying new restaurants/cafes in the Bay (@florencelin on Beli!)</li>
+                            <li>Getting back into running and lifting</li>
+                            <li>Probably making a matcha or coffee...</li>
+                        </ul> 
+                        Studying: 
+                        <ul style="list-style-type:circle">
+                            <li>Computer Science B.S. at Harvey Mudd College</li>
+                            <li>Linguistics B.A. at Pomona College</li>
+                        </ul>
+                    </p>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- <section id="projects" class="view">
+	<section id="work" class="view">
 		<div class="page-container">
-			<div class="projects-inner">
+			<div class="work-inner">
+
+				<div class="tabs">
+					<button class="tab-btn active" data-tab="cs">computer science</button>
+					<button class="tab-btn" data-tab="ling">linguistics</button>
+				</div>
+
+				<!-- CS Tab -->
+				<div class="tab-panel active" id="panel-cs">
+
+					<div class="proj-item">
+						<p class="proj-tag">Spring 2026</p>
+						<p class="proj-title">VLM Benchmark: Road Sign Understanding</p>
+						<p class="proj-desc">Designed and ran a comparative evaluation pipeline for two Google Gemma vision-language models on road sign understanding, implementing custom inference scripts and NLP metrics (BLEU, BERTScore F1) to assess performance across text extraction and real-world driving scenario prompts.</p>
+						<div class="proj-links">
+							<a class="proj-link" href="https://github.com/florence-r-lin/cv153_VLM_roadsign_comparison" target="_blank" rel="noopener">GitHub</a>
+							<a class="proj-link" href="https://drive.google.com/file/d/1AeWGQPupjNdG_fuQ684wzbClcJx9v_j5/view" target="_blank" rel="noopener">Paper</a>
+						</div>
+					</div>
+
+					<div class="proj-item">
+						<p class="proj-tag">Spring 2024 – Spring 2026</p>
+						<p class="proj-title">Code Metrics: Longitudinal Student Coding Behavior Analysis</p>
+						<p class="proj-desc">Co-developed a Python AST-based code analysis pipeline and companion web app to support CS education research, enabling longitudinal study of student coding behaviors — tracking trends in complexity, documentation habits, and loop structure across 2017–2025 cohorts to surface data-driven insights for curriculum design.</p>
+						<div class="proj-links">
+							<a class="proj-link" href="https://github.com/Yuan-Garcia/Code-Heuristics" target="_blank" rel="noopener">GitHub</a>
+							<a class="proj-link" href="https://dl.acm.org/doi/10.5555/3729849.3729853" target="_blank" rel="noopener">ACM</a>
+						</div>
+					</div>
+
+					<div class="proj-item">
+						<p class="proj-tag">Fall 2025</p>
+						<p class="proj-title">Low-Pressure Social Listening: a Spotify HCD Case Study</p>
+						<p class="proj-desc">Led end-to-end HCD research and prototyping for a novel Spotify social widget, from storyboard-guided user interviews and affinity diagramming to contextual prototype testing with SUS evaluation; widget surfaces friends' listening activity with low social pressure and minimal feature bloat.</p>
+						<div class="proj-links">
+							<a class="proj-link" href="https://www.figma.com/board/rL3BrHwE8jleC4ioMR7loX/Human-Centered-Computing?node-id=0-1&t=E4zeyENMBnbIWwER-1" target="_blank" rel="noopener">Figma</a>
+							<a class="proj-link" href="https://drive.google.com/file/d/18v3syPFqzncgtjH-oV3TDYXOOVymqXv1/view?usp=sharing" target="_blank" rel="noopener">Report</a>
+						</div>
+					</div>
+
+					<div class="proj-item">
+						<p class="proj-tag">Spring 2025</p>
+						<p class="proj-title">Beyond Wrapped: Spotify Listening Trends Tutorial</p>
+						<p class="proj-desc">A user-centric data analysis tutorial for Spotify listeners curious about their music habits beyond Spotify Wrapped; guides users through Spotify API integration and Matplotlib visualizations of personalized listening trends, with sample datasets to lower barriers to entry for users unable to access extended history.</p>
+						<div class="proj-links">
+							<a class="proj-link" href="https://github.com/florence-r-lin/spotify-data-trend-analysis-tutorial" target="_blank" rel="noopener">GitHub</a>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Linguistics Tab -->
+				<div class="tab-panel" id="panel-ling">
+
+					<div class="proj-item">
+						<p class="proj-tag">Spring 2026 · Field Methods in Linguistics, Pomona College</p>
+						<p class="proj-title">Sketch Grammar of Luganda</p>
+						<p class="proj-desc">Conducted semester-long primary linguistic fieldwork with a native Luganda speaker over 14 elicitation sessions to produce a complete sketch grammar, documenting 21 consonants, 17 noun classes, 9 tense distinctions, and a full syntactic analysis of word order and question formation in an understudied Bantu language.</p>
+                        <div class="proj-links">
+							<a class="proj-link" href="https://drive.google.com/file/d/1gv2ccl0AM2KxhRPTWZKS5X1HjPKIJf9Q/view?usp=drive_link" target="_blank" rel="noopener">Paper</a>
+						</div>
+					</div>
+
+					<div class="proj-item">
+						<p class="proj-tag">Spring 2026 · Topics in Morphosyntax, Pomona College</p>
+						<p class="proj-title">Conjunctions and Disjunctions in Tiriki</p>
+						<p class="proj-desc">Documented coordination in Tiriki (a Bantu macro-language of Western Kenya) via native speaker elicitation, analyzing the syntactic distribution and semantic distinctions of conjunctions, disjunctions, and subordinate clauses with attention to tense-conditioned morphological variation in coordinated verb phrases.</p>
+                        <div class="proj-links">
+							<a class="proj-link" href="https://drive.google.com/file/d/1SgHgTRfYmqNvLS9SWPVyDOy80XZw0IFZ/view?usp=drive_link" target="_blank" rel="noopener">Paper</a>
+						</div>
+					</div>
+
+					<div class="proj-item">
+						<p class="proj-tag">Spring 2026 · Topics in Morphosyntax, Pomona College</p>
+						<p class="proj-title">Nominalization in Tiriki</p>
+						<p class="proj-desc">Co-authored a morphosyntactic analysis of nominalization in Tiriki, identifying 8–9 nominalizing prefixes spanning agentive, instrumental, gerund, and infinitive noun classes and systematically characterizing their verbal vs. nominal properties across auxiliary-taking, object-marking, and derivational suffix compatibility.</p>
+                        <div class="proj-links">
+							<a class="proj-link" href="https://drive.google.com/file/d/1Ma28cCpIvvb8vMTu3rnK0pRwbDzWqRDs/view?usp=drive_link" target="_blank" rel="noopener">Paper</a>
+						</div>
+					</div>
+
+				</div>
+
 			</div>
 		</div>
-	</section> -->
+	</section>
 
 	<section id="gallery" class="view">
 		<div class="page-container">
@@ -185,7 +411,7 @@
 						<div class="slide"><div class="slide-inner"><img src="pics/people/DSCN2793.jpg" alt="people"></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_1447.JPG" alt="people"></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_1476.jpeg" alt="people"></div></div>
-						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3128.jpeg" alt="people">/div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3128.jpeg" alt="people"></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3948.jpeg" alt="people"></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_3985.jpeg" alt="people"></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/people/IMG_5068.jpeg" alt="people"></div></div>
@@ -218,7 +444,7 @@
 						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3343.jpeg" alt="food"><div class="slide-overlay"><span>old brea chop house, ca</span></div></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3500.jpeg" alt="food"><div class="slide-overlay"><span>hanbat shul lung tang, ca</span></div></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3676.jpeg" alt="food"><div class="slide-overlay"><span>matcha</span></div></div></div>
-						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3701.jpeg" alt="food"><div class="slide-overlay"><span>mountain house, ca/span></div></div></div>
+						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3701.jpeg" alt="food"><div class="slide-overlay"><span>mountain house, ca</span></div></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3836.jpeg" alt="food"><div class="slide-overlay"><span>saero, ca</span></div></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_3856.jpeg" alt="food"><div class="slide-overlay"><span>heytea, ca</span></div></div></div>
 						<div class="slide"><div class="slide-inner"><img src="pics/food/IMG_4509.jpeg" alt="food"><div class="slide-overlay"><span>sky boss, hk</span></div></div></div>
@@ -254,9 +480,7 @@
 	<script>
 		const views = document.querySelectorAll('.view');
 		function showView(id) {
-			views.forEach(v => {
-				v.classList.toggle('active', v.id === id);
-			});
+			views.forEach(v => { v.classList.toggle('active', v.id === id); });
 			window.scrollTo(0, 0);
 		}
 		function route() {
@@ -269,6 +493,32 @@
 			if (href && href.startsWith('#')) { e.preventDefault(); location.hash = href; }
 		}));
 		route();
+
+		// Hamburger
+		const hamburger = document.getElementById('hamburger');
+		const mobileMenu = document.getElementById('mobile-menu');
+		hamburger.addEventListener('click', () => {
+			const open = mobileMenu.classList.toggle('open');
+			hamburger.setAttribute('aria-expanded', open);
+		});
+		// Close mobile menu on nav link click
+		document.querySelectorAll('[data-mobile]').forEach(a => a.addEventListener('click', () => {
+			mobileMenu.classList.remove('open');
+			hamburger.setAttribute('aria-expanded', false);
+		}));
+		// Close on hash change
+		window.addEventListener('hashchange', () => {
+			mobileMenu.classList.remove('open');
+			hamburger.setAttribute('aria-expanded', false);
+		});
+
+		document.querySelectorAll('.tab-btn').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const target = btn.dataset.tab;
+				document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === target));
+				document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + target));
+			});
+		});
 
 		document.querySelectorAll('[data-carousel]').forEach(carousel => {
 			const viewport = carousel.querySelector('.viewport');
